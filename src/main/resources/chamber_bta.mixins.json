@@ -1,11 +1,12 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "turniplabs.examplemod.mixin",
+  "package": "baguchan.chamber_bta.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
     ],
     "client": [
+      "MinecraftMixin"
     ],
     "injectors": {
         "defaultRequire": 1

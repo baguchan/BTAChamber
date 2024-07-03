@@ -1,12 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+	"id": "chamber_bta",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+	"name": "Chamber BTA",
+	"description": "Trial Chamber For BTA",
   "authors": [
-    "Turnip Labs"
+		"bagu_chan"
   ],
   "contact": {
     "homepage": "",
@@ -19,26 +18,34 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"baguchan.chamber_bta.ChamberBTA"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"baguchan.chamber_bta.ChamberBTA"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"baguchan.chamber_bta.ChamberBTA"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"baguchan.chamber_bta.ChamberBTA"
+		],
+		"beforeClientStart": [
+			"baguchan.chamber_bta.ChamberBTAClient"
+		],
+		"afterClientStart": [
+			"baguchan.chamber_bta.ChamberBTAClient"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+		"chamber_bta.mixins.json"
   ],
-
-  "depends": {
-		"minecraft": "^7.2-beta",
-    "fabricloader": ">=0.15.5"
-  },
+	"depends": {
+		"fabricloader": ">=0.15.6-babric.6-bta",
+		"halplibe": ">=4.1.3",
+		"dragonfly": ">=1.5.0-7.2-pre2",
+		"better_ai": ">=4.0.0-7.2",
+		"terrain-api": ">=1.4.4-7.2-pre1"
+	},
   "suggests": {
   }
 }
