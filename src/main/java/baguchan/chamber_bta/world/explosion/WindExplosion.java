@@ -1,5 +1,8 @@
 package baguchan.chamber_bta.world.explosion;
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockButton;
+import net.minecraft.core.block.BlockTrapDoor;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.sound.SoundCategory;
@@ -16,7 +19,7 @@ import java.util.List;
 public class WindExplosion extends Explosion {
 	public WindExplosion(World world, Entity entity, double x, double y, double z, float explosionSize) {
 		super(world, entity, x, y, z, explosionSize);
-		this.destroyBlocks = false;
+		this.destroyBlocks = true;
 	}
 
 	public void doExplosionB(boolean particles) {
@@ -48,8 +51,50 @@ public class WindExplosion extends Explosion {
 				this.worldObj.spawnParticle("smoke", xPos, yPos, zPos, d3, d4, d5, 0);
 			}
 			if (id <= 0) continue;
+
+			if (Block.blocksList[id] instanceof BlockButton) {
+				onBlockButtonActive(worldObj, x, y, z, id);
+			}
+
+			if (Block.blocksList[id] instanceof BlockTrapDoor) {
+				onBlockTrapDoorActive(worldObj, x, y, z);
+			}
+
 			//Block.blocksList[id].updateTick(this.worldObj, x, y, z, this.worldObj.rand);
 		}
+	}
+
+	public boolean onBlockTrapDoorActive(World world, int x, int y, int z) {
+		int l = world.getBlockMetadata(x, y, z);
+		world.setBlockMetadataWithNotify(x, y, z, l ^ 4);
+		return true;
+	}
+
+	public boolean onBlockButtonActive(World world, int x, int y, int z, int id) {
+		int l = world.getBlockMetadata(x, y, z);
+		int i1 = l & 7;
+		int j1 = 8 - (l & 8);
+		if (j1 == 0) {
+			return true;
+		}
+		world.setBlockMetadataWithNotify(x, y, z, i1 + j1);
+		world.markBlocksDirty(x, y, z, x, y, z);
+		world.notifyBlocksOfNeighborChange(x, y, z, id);
+		if (i1 == 1) {
+			world.notifyBlocksOfNeighborChange(x - 1, y, z, id);
+		} else if (i1 == 2) {
+			world.notifyBlocksOfNeighborChange(x + 1, y, z, id);
+		} else if (i1 == 3) {
+			world.notifyBlocksOfNeighborChange(x, y, z - 1, id);
+		} else if (i1 == 4) {
+			world.notifyBlocksOfNeighborChange(x, y, z + 1, id);
+		} else if (i1 == 5) {
+			world.notifyBlocksOfNeighborChange(x, y + 1, z, id);
+		} else {
+			world.notifyBlocksOfNeighborChange(x, y - 1, z, id);
+		}
+		world.scheduleBlockUpdate(x, y, z, id, Block.blocksList[id].tickRate());
+		return true;
 	}
 
 	protected void damageEntities() {

@@ -34,6 +34,9 @@
 		],
 		"afterClientStart": [
 			"baguchan.chamber_bta.ChamberBTAClient"
+		],
+		"terrain-api": [
+			"baguchan.chamber_bta.ChamberTerrainAPI"
 		]
 	},
   "mixins": [

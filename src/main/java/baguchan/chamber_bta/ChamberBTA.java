@@ -1,5 +1,6 @@
 package baguchan.chamber_bta;
 
+import baguchan.chamber_bta.block.ModBlocks;
 import baguchan.chamber_bta.entity.breeze.BreezeRender;
 import baguchan.chamber_bta.entity.breeze.EntityBreeze;
 import baguchan.chamber_bta.entity.windcharge.EntityBreezeWindCharge;
@@ -24,8 +25,7 @@ public class ChamberBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	static {
 		Properties prop = new Properties();
-		prop.setProperty("starting_block_id", "3200");
-		prop.setProperty("starting_item_id", "26000");
+		prop.setProperty("starting_block_id", "3600");
 		prop.setProperty("starting_entity_id", "640");
 		config = new ConfigHandler(ChamberBTA.MOD_ID, prop);
 		entityID = config.getInt("starting_entity_id");
@@ -40,6 +40,7 @@ public class ChamberBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void beforeGameStart() {
+		ModBlocks.createBlocks();
 		EntityHelper.createEntity(EntityBreeze.class, entityID, "Breeze", () -> new BreezeRender(ChamberBTAClient.modelBreeze, ChamberBTAClient.modelWind, 0.5F));
 		EntityHelper.createEntity(EntityBreezeWindCharge.class, entityID + 1, "WindCharge", () -> new WindChargeRenderer());
 		StatList.mobEncounterStats.put("Breeze", new StatMob(0x1050000 + EntityDispatcher.getEntityID(EntityBreeze.class), "stat.encounterMob", "Breeze").registerStat());

@@ -1,2 +1,5 @@
 section.chamber_bta.breeze.name=Breeze
 section.chamber_bta.breeze.desc=A Windy Creature. when found player. shoot annoying wind charge
+
+tile.chamber_bta.trial_spawner.name=Trial Spawner
+tile.chamber_bta.trial_spawner.desc=Trial. You want it?
