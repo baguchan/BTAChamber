@@ -27,6 +27,7 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 	private int entityMaxCount = 4;
 	private int itemCount = 1;
 	public String mobId = "Pig";
+	private boolean found;
 
 	public String getMobId() {
 		return this.mobId;
@@ -50,13 +51,15 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 
 	public boolean anyPlayerInRange() {
 		if (this.worldObj != null) {
-			EntityPlayer player = this.worldObj.getClosestPlayer((double) this.x + 0.5, (double) this.y + 0.5, (double) this.z + 0.5, 12.0);
+			EntityPlayer player = this.worldObj.getClosestPlayer((double) this.x + 0.5, (double) this.y + 0.5, (double) this.z + 0.5, 16.0);
 
-			if (player != null) {
+			if (player != null && !player.gamemode.isPlayerInvulnerable() && !found) {
 				Vec3d newPosition = Vec3d.createVector((double) this.x + 0.5, (double) this.y + 0.5, (double) this.z + 0.5);
 				Vec3d oldPosition = Vec3d.createVector(player.x, player.y + player.getHeadHeight(), player.z);
 				HitResult hitResult = this.worldObj.checkBlockCollisionBetweenPoints(oldPosition, newPosition, false, true);
 				return hitResult != null && this.worldObj.getBlockTileEntity(hitResult.x, hitResult.y, hitResult.z) == this;
+			} else {
+				return player != null && found;
 			}
 		}
 
@@ -77,6 +80,7 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 				this.cooldown = this.worldObj.getWorldTime() + 20 * 60 * 30;
 				this.worldObj.setBlockMetadataWithNotify(this.x, this.y, this.z, 1);
 				this.spawnCount = -1;
+				this.found = false;
 				return;
 			} else {
 				if (this.worldObj.getBlockMetadata(this.x, this.y, this.z) != 0) {
@@ -95,6 +99,7 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 				}
 				this.spawnCount = 0;
 				this.delay = 30;
+				this.found = true;
 				return;
 			}
 			double xPos = (double) this.x + (double) this.worldObj.rand.nextFloat();
@@ -137,8 +142,8 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 					if (entityliving == null) {
 						return;
 					}
-					int j = this.worldObj.getEntitiesWithinAABB(entityliving.getClass(), AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1, this.y + 1, this.z + 1).expand(8.0, 4.0, 8.0)).size();
-					if (j >= 6) {
+					int j = this.worldObj.getEntitiesWithinAABB(entityliving.getClass(), AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1, this.y + 1, this.z + 1).expand(8.0, 8.0, 8.0)).size();
+					if (j >= 2) {
 						this.updateDelay();
 						return;
 					}
@@ -207,6 +212,7 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 		this.itemID = tag.getInteger("ItemID");
 		this.itemCount = tag.getInteger("ItemCount");
 		this.delay = tag.getShort("Delay");
+		this.found = tag.getBoolean("Found");
 		this.setMobId(tag.getString("EntityId"));
 	}
 
@@ -220,6 +226,7 @@ public class TileEntityTrialMobSpawner extends TileEntityMobSpawner {
 		tag.putInt("ItemID", this.itemID);
 		tag.putInt("ItemCount", this.itemCount);
 		tag.putShort("Delay", (short) this.delay);
+		tag.putBoolean("Found", this.found);
 		tag.putString("EntityId", this.mobId != null ? this.mobId : "none");
 	}
 }

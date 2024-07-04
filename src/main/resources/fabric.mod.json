@@ -2,7 +2,7 @@
   "schemaVersion": 1,
 	"id": "chamber_bta",
   "version": "${version}",
-	"name": "Chamber BTA",
+	"name": "BTA Chamber",
 	"description": "Trial Chamber For BTA",
   "authors": [
 		"bagu_chan"
