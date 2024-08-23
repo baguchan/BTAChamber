@@ -72,7 +72,7 @@ public class EntityBreezeWindCharge extends EntityProjectile {
 
 	@Override
 	public void onHit(HitResult result) {
-		if (this.tickCount > 5) {
+		if (this.tickCount > 3 || result.hitType == HitResult.HitType.TILE) {
 			if (!this.world.isClientSide) {
 				if (result.entity != null) {
 					result.entity.hurt(this.owner, this.damage, DamageType.COMBAT);

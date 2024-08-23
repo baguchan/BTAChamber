@@ -25,7 +25,7 @@ public class ChamberTerrainAPI implements TerrainAPI {
 		int px = x + parameters.random.nextInt(16);
 		int pz = z + parameters.random.nextInt(16);
 		int k8 = parameters.chunk.world.getHeightValue(px, pz) - (parameters.random.nextInt(2) + 2);
-		if (parameters.random.nextInt(500) == 0) {
+		if (parameters.random.nextInt(100) == 0) {
 			Random lRand = parameters.chunk.getChunkRandom(94251327L);
 			new TrialChamberGen().generate(parameters.chunk.world, lRand, px, k8, pz);
 		}

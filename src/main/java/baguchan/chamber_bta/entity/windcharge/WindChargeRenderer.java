@@ -1,11 +1,11 @@
 package baguchan.chamber_bta.entity.windcharge;
 
+import baguchan.chamber_bta.item.ModItems;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.item.Item;
 import org.lwjgl.opengl.GL11;
 
 public class WindChargeRenderer extends EntityRenderer<EntityBreezeWindCharge> {
@@ -16,7 +16,7 @@ public class WindChargeRenderer extends EntityRenderer<EntityBreezeWindCharge> {
 		GL11.glEnable(32826);
 		float scalar = 2.0f;
 		GL11.glScalef(1.0f, 1.0f, 1.0f);
-		IconCoordinate i = ((ItemModel) ItemModelDispatcher.getInstance().getDispatch(Item.ammoSnowball)).getIcon(null, Item.ammoSnowball.getDefaultStack());
+		IconCoordinate i = ((ItemModel) ItemModelDispatcher.getInstance().getDispatch(ModItems.wind_charge)).getIcon(null, ModItems.wind_charge.getDefaultStack());
 		i.parentAtlas.bindTexture();
 		Tessellator tessellator = Tessellator.instance;
 		float f3 = (float) i.getIconUMin();

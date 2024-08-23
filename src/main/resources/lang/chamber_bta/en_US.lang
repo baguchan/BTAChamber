@@ -1,5 +1,8 @@
-section.backport_bta.breeze.name=Breeze
-section.backport_bta.breeze.desc=A Windy Creature. when found player. shoot annoying wind charge
+section.chamber_bta.breeze.name=Breeze
+section.chamber_bta.breeze.desc=A Windy Creature. when found player. shoot annoying wind charge
 
-tile.backport_bta.trial_spawner.name=Trial Spawner
-tile.backport_bta.trial_spawner.desc=Trial. You want it?
+tile.chamber_bta.trial_spawner.name=Trial Spawner
+tile.chamber_bta.trial_spawner.desc=Trial. You want it?
+
+item.chamber_bta.breeze_rod.name=Breeze Rod
+item.chamber_bta.wind_charge.name=Wind Charge

@@ -31,7 +31,6 @@ public class ChamberBTAClient implements ClientStartEntrypoint {
 
 	@Override
 	public void afterClientStart() {
-
 	}
 
 }

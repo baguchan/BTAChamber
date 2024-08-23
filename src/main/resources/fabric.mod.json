@@ -47,7 +47,8 @@
 		"halplibe": ">=4.1.3",
 		"dragonfly": ">=1.5.0-7.2-pre2",
 		"better_ai": ">=4.0.0-7.2",
-		"terrain-api": ">=1.4.4-7.2-pre1"
+		"terrain-api": ">=1.4.4-7.2-pre1",
+		"structure_lib": ">=1.1.0"
 	},
   "suggests": {
   }

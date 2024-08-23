@@ -3,6 +3,8 @@ package baguchan.chamber_bta.entity.breeze;
 import baguchan.better_ai.api.IPathGetter;
 import baguchan.better_ai.util.BlockPath;
 import baguchan.chamber_bta.entity.windcharge.EntityBreezeWindCharge;
+import baguchan.chamber_bta.item.ModItems;
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -26,6 +28,8 @@ public class EntityBreeze extends EntityMonster implements IPathGetter {
 		this.setSize(0.6F, 1.7F);
 		this.setPos(this.x, this.y, this.z);
 		this.setPathfindingMalus(this, BlockPath.WATER, -1.0F);
+		this.mobDrops.add(new WeightedRandomLootObject(ModItems.breeze_rod.getDefaultStack(), 1, 2));
+
 	}
 
 	@Override
